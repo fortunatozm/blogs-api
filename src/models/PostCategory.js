@@ -8,6 +8,20 @@ const PostModel = (sequelize, DataTypes) => {
     timestamps: false
   });
 
+  postsCategories.associate = (model) => {
+    postsCategories.belongsToMany(model.BlogPost, {
+      as: 'blog_posts',
+      foreignKey: 'id_blog_posts'
+    });
+  },
+
+  postsCategories.associate = (model) => {
+    postsCategories.belongsToMany(model.Category, {
+      as: 'category',
+      foreignKey: 'id_category'
+    });
+  }
+
   return postsCategories;
 };
 
