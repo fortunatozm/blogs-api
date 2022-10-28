@@ -1,10 +1,9 @@
 const CategoryModel = (sequelize, DataTypes) => {
-  const category = sequelize.define('category', {
+  const category = sequelize.define('Category', {
     id: DataTypes.INTEGER,
     name: DataTypes.STRING,
   }, {
     tableName: 'category',
-    underscored: true,
     timestamps: false
   });
 
