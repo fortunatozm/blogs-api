@@ -18,7 +18,9 @@ module.exports = {
       user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'User', key: 'id' },
+        onUpdate: CASCADE,
+        onDelete: CASCADE,
       },
       published: {
         type: Sequelize.DATE
