@@ -8,21 +8,21 @@ const PostModel = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  postsCategories.associate = (model) => {
-    postsCategories.belongsToMany(model.BlogPost, {
+  postsCategories.associate = ({Category, BlogPost}) => {
+    Category.belongsToMany(BlogPost, {
       as: 'blog_posts',
       through: 'posts_categories',
-      foreignKey: 'id_blog_posts'
-    });
-  },
-
-  postsCategories.associate = (model) => {
-    postsCategories.belongsToMany(model.Category, {
+      foreignKey: ' id_category',
+      otherKey: 'id_blog_posts'
+    })
+    BlogPost.belongsToMany(Category, {
       as: 'category',
       through: 'posts_categories',
-      foreignKey: 'id_category'
-    });
-  }
+      foreignKey: 'id_blog_posts',
+      otherKey: 'id_category'
+    })
+
+  };
 
   return postsCategories;
 };
