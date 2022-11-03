@@ -72,8 +72,19 @@ const serviceGetAllUsers = async () => {
   return dados;
 };
 
+const serviceGetUserById = async (idIn) => {
+  const finded = await User.findOne({ where: { id: idIn } });
+  if (idIn) {    
+    if (finded !== null) {
+      const { password: _, ...findedSemPassword } = finded.dataValues;
+      return findedSemPassword;
+    } return 401;
+  } return 400;
+};
+
 module.exports = {
   serviceLogin,
   serUser,
   serviceGetAllUsers,
+  serviceGetUserById,
 };

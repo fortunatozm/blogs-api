@@ -11,8 +11,6 @@ return token;
 const validToken = (token) => {
   try {
     const { data } = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(data);
-    console.log('Aqui');
     return data;
   } catch (error) {
     const e = 'Token inválido';

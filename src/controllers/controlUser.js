@@ -1,4 +1,8 @@
-const { serviceLogin, serUser, serviceGetAllUsers } = require('../services/serviceUser');
+const { 
+  serviceLogin, 
+  serUser, 
+  serviceGetAllUsers, 
+  serviceGetUserById } = require('../services/serviceUser');
 
 const controllerLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -36,8 +40,20 @@ const controllerGetUser = async (_req, res) => {
   return res.status(200).json(data);
 };
 
+const controllerGetUserById = async (req, res) => {
+  const { id } = req.params;
+  const data = await serviceGetUserById(id);
+  if (data === 401) {
+    return res.status(404).json({ message: 'User does not exist' });
+  } if (data === 400) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+  return res.status(200).json(data);
+};
+
 module.exports = {
   controllerLogin,
   controllerUser,
   controllerGetUser,
+  controllerGetUserById,
 };
