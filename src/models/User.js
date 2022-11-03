@@ -6,7 +6,7 @@ const UserModel = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       displayName: DataTypes.STRING,
-      email: DataTypes.STRING,
+      email: { type: DataTypes.STRING, unique: true, },
       password: DataTypes.STRING,
       image: DataTypes.STRING,
     }, {
