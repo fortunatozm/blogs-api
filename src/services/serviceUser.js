@@ -27,7 +27,7 @@ const ValidDisplayEmail = async (emailIn) => {
     console.log('teste', valid.test(emailIn));
     return 402;
   }
-  
+
   if (reult !== null) { 
     const { dataValues: { email } } = reult;
     console.log('email consultado', email);
@@ -65,7 +65,15 @@ const serUser = async (displayName, email, password, image) => {
     return createToken(createdSemPassword); }
 };
 
+const serviceGetAllUsers = async () => {
+  const data = await User.findAll();
+  const dados = data.map(({ dataValues: { 
+    id, displayName, email, image } }) => ({ id, displayName, email, image }));
+  return dados;
+};
+
 module.exports = {
   serviceLogin,
   serUser,
+  serviceGetAllUsers,
 };

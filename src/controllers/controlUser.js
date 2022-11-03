@@ -1,4 +1,4 @@
-const { serviceLogin, serUser } = require('../services/serviceUser');
+const { serviceLogin, serUser, serviceGetAllUsers } = require('../services/serviceUser');
 
 const controllerLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -31,7 +31,13 @@ const controllerUser = async (req, res) => {
   res.status(201).json({ token: user });
 };
 
+const controllerGetUser = async (_req, res) => {
+  const data = await serviceGetAllUsers();
+  return res.status(200).json(data);
+};
+
 module.exports = {
   controllerLogin,
   controllerUser,
+  controllerGetUser,
 };
