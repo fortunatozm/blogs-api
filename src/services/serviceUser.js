@@ -24,13 +24,11 @@ const ValidDisplayEmail = async (emailIn) => {
   console.log('esta aqui');
 
   if (valid.test(emailIn) === false) {
-    console.log('teste', valid.test(emailIn));
     return 402;
   }
 
   if (reult !== null) { 
     const { dataValues: { email } } = reult;
-    console.log('email consultado', email);
     if (email === emailIn) {
       return 401;
     }
