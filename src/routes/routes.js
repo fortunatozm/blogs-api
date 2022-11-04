@@ -22,7 +22,7 @@ myRouter.post('/categories', middwareValidToken, controllerInsertCategory);
 myRouter.post('/post', controllerInsertPost);
 myRouter.get('/user', middwareValidToken, controllerGetUser);
 myRouter.get('/categories', middwareValidToken, controllerGetCategories);
-myRouter.get('/post', controllerGetAllPosts);
+myRouter.get('/post', middwareValidToken, controllerGetAllPosts);
 myRouter.get('/user/:id', middwareValidToken, controllerGetUserById);
 
 module.exports = {

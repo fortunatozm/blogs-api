@@ -4,7 +4,6 @@ const middwareValidToken = (req, res, next) => {
   const { authorization } = req.headers;
   if (authorization) {
     const valid = validToken(authorization);
-    console.log(valid);
     if (valid === 'Token inválido') {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }

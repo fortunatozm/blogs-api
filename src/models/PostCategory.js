@@ -10,7 +10,7 @@ const PostModel = (sequelize, DataTypes) => {
     categoryId: { 
       type: DataTypes.INTEGER,
       reference: {
-        model: 'category',
+        model: 'categories',
         key: 'id'
       }
      },
@@ -24,14 +24,14 @@ const PostModel = (sequelize, DataTypes) => {
     Category.belongsToMany(BlogPost, {
       as: 'blog_posts',
       through: 'posts_categories',
-      foreignKey: ' id_category',
-      otherKey: 'id_posts'
+      foreignKey: 'category_id',
+      otherKey: 'post_id'
     })
     BlogPost.belongsToMany(Category, {
-      as: 'category',
+      as: 'categories',
       through: 'posts_categories',
-      foreignKey: 'id_posts',
-      otherKey: 'id_category'
+      foreignKey: 'post_id',
+      otherKey: 'category_id'
     })
 
   };

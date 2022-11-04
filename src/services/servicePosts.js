@@ -1,4 +1,5 @@
-const { BlogPost } = require('../models/index');
+// const { use } = require('express/lib/router');
+const { BlogPost, User, Category } = require('../models/index');
 
 const serviceInsertPost = async (data) => {
   const dados = await BlogPost.create(data);
@@ -6,7 +7,12 @@ const serviceInsertPost = async (data) => {
 };
 
 const serviceGetAllPosts = async () => {
-  const data = await BlogPost.findAll();
+  const data = await BlogPost.findAll({
+    include: [
+    { model: User, as: 'user', attributes: { exclude: 'password' } },
+    { model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+  // const dados = data.dataValues;
   return data;
 };
 
