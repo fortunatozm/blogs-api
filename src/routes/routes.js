@@ -10,7 +10,7 @@ const {
   controllerGetCategories,
  } = require('../controllers/controlCategories');
 
- const { controllerInsertPost } = require('../controllers/controlPosts');
+ const { controllerInsertPost, controllerGetAllPosts } = require('../controllers/controlPosts');
 
 const { middwareValidToken } = require('../middwares/token');
 
@@ -21,8 +21,9 @@ myRouter.post('/user', controllerUser);
 myRouter.post('/categories', middwareValidToken, controllerInsertCategory);
 myRouter.post('/post', controllerInsertPost);
 myRouter.get('/user', middwareValidToken, controllerGetUser);
-myRouter.get('/user/:id', middwareValidToken, controllerGetUserById);
 myRouter.get('/categories', middwareValidToken, controllerGetCategories);
+myRouter.get('/post', controllerGetAllPosts);
+myRouter.get('/user/:id', middwareValidToken, controllerGetUserById);
 
 module.exports = {
   myRouter,

@@ -5,4 +5,9 @@ const serviceInsertPost = async (data) => {
   return dados;
 };
 
-module.exports = { serviceInsertPost };
+const serviceGetAllPosts = async () => {
+  const data = await BlogPost.findAll();
+  return data;
+};
+
+module.exports = { serviceInsertPost, serviceGetAllPosts };

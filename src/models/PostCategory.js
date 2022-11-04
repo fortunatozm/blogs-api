@@ -25,12 +25,12 @@ const PostModel = (sequelize, DataTypes) => {
       as: 'blog_posts',
       through: 'posts_categories',
       foreignKey: ' id_category',
-      otherKey: 'id_blog_posts'
+      otherKey: 'id_posts'
     })
     BlogPost.belongsToMany(Category, {
       as: 'category',
       through: 'posts_categories',
-      foreignKey: 'id_blog_posts',
+      foreignKey: 'id_posts',
       otherKey: 'id_category'
     })
 
