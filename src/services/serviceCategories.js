@@ -6,7 +6,10 @@ const serverInsertCategory = async (name) => {
 };
 
 const serverGetCategories = async () => {
-
+  const data = Category.findAll();
+  return data;
 };
 
-module.exports = { serverInsertCategory, serverGetCategories };
+module.exports = { 
+  serverInsertCategory,
+  serverGetCategories };

@@ -11,10 +11,12 @@ const controllerInsertCategory = async (req, res) => {
   return res.status(400).json({ message: '"name" is required' });
 };
 
-const controllerGetCategories = async () => {
-  await serverGetCategories();
+const controllerGetCategories = async (_req, res) => {
+  const result = await serverGetCategories();
+  return res.status(200).json(result);
 };
 
 module.exports = { 
   controllerInsertCategory,
-  controllerGetCategories };
+  controllerGetCategories,
+ };
