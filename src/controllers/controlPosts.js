@@ -54,13 +54,13 @@ const controllerDelePostById = async (req, res) => {
   const { id } = req.params;
   const { authorization } = req.headers;
   const { id: userId } = validToken(authorization);
-  // if (userId) {
-    
-  // } else {
-    
-  // }
   const data = await serviceDelePostById(id, userId);
-  return res.status(200).json(data);
+  if (data === 401) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  } if (data === 404) {
+    return res.status(404).json({ message: 'Post does not exist' });
+  }
+  return res.status(204).json(data);
 };
 
 module.exports = {

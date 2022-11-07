@@ -35,13 +35,14 @@ const serviceGetPostById = async (id) => {
   return data;
 };
 
-const serviceDelePostById = async (idd, _tokenId) => {
+const serviceDelePostById = async (idd, tokenId) => {
   const datas = await BlogPost.findOne({ where: { id: idd } });
-  // console.log(datas.id);
 
-  if (datas) {    
-    const data = await BlogPost.destroy({ where: { id: idd } });
-    return data;
+  if (datas) {
+    if (tokenId === datas.user_id) {    
+      const data = await BlogPost.destroy({ where: { id: idd } });
+      return data;
+    } return 401; 
   } return 404;
 };
 
