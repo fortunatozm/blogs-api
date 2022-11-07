@@ -3,6 +3,7 @@ const {
   serviceGetAllPosts,
   serverGetAllCategories,
   serviceGetPostById,
+  serviceDelePostById,
 } = require('../services/servicePosts');
 const { validToken } = require('../functions');
 
@@ -49,4 +50,21 @@ const controllerGetPostById = async (req, res) => {
   } return res.status(404).json({ message: 'Post does not exist' });
 };
 
-module.exports = { controllerInsertPost, controllerGetAllPosts, controllerGetPostById };
+const controllerDelePostById = async (req, res) => {
+  const { id } = req.params;
+  const { authorization } = req.headers;
+  const { id: userId } = validToken(authorization);
+  // if (userId) {
+    
+  // } else {
+    
+  // }
+  const data = await serviceDelePostById(id, userId);
+  return res.status(200).json(data);
+};
+
+module.exports = {
+  controllerInsertPost,
+  controllerGetAllPosts,
+  controllerGetPostById,
+  controllerDelePostById };

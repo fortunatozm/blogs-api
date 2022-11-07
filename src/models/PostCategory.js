@@ -2,17 +2,19 @@ const PostModel = (sequelize, DataTypes) => {
   const postsCategories = sequelize.define('PostCategory', {
     postId: { 
       type: DataTypes.INTEGER,
-      reference: { 
-        model: 'blog_posts',
-        key: 'id'
-       }
+      primaryKey: true,
+      // reference: { 
+      //   model: 'blog_posts',
+      //   key: 'id'
+      //  }
      },
     categoryId: { 
       type: DataTypes.INTEGER,
-      reference: {
-        model: 'categories',
-        key: 'id'
-      }
+      primaryKey: true,
+      // reference: {
+      //   model: 'categories',
+      //   key: 'id'
+      // }
      },
   }, {
     tableName: 'posts_categories',

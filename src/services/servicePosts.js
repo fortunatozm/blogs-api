@@ -35,8 +35,19 @@ const serviceGetPostById = async (id) => {
   return data;
 };
 
+const serviceDelePostById = async (idd, _tokenId) => {
+  const datas = await BlogPost.findOne({ where: { id: idd } });
+  // console.log(datas.id);
+
+  if (datas) {    
+    const data = await BlogPost.destroy({ where: { id: idd } });
+    return data;
+  } return 404;
+};
+
 module.exports = {
   serviceInsertPost,
   serviceGetAllPosts,
   serverGetAllCategories,
-  serviceGetPostById };
+  serviceGetPostById,
+  serviceDelePostById };
