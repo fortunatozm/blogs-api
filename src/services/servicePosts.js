@@ -1,8 +1,18 @@
 // const { use } = require('express/lib/router');
-const { BlogPost, User, Category } = require('../models/index');
+const { BlogPost, User, Category, PostCategory } = require('../models/index');
+
+const serverGetAllCategories = async () => {
+  const data = await Category.findAll();
+  return data;
+};
 
 const serviceInsertPost = async (data) => {
-  const dados = await BlogPost.create(data);
+  const dados = await BlogPost.create({ ...data, published: new Date(), updated: new Date() });
+  console.log('Dados', data.categoryIds, dados.id);
+  const promises = data.categoryIds.map(async (dat) => PostCategory.create({ 
+    postId: dados.id, categoryId: dat }));
+  await Promise.all(promises);
+  
   return dados;
 };
 
@@ -12,8 +22,21 @@ const serviceGetAllPosts = async () => {
     { model: User, as: 'user', attributes: { exclude: 'password' } },
     { model: Category, as: 'categories', through: { attributes: [] } }],
   });
-  // const dados = data.dataValues;
   return data;
 };
 
-module.exports = { serviceInsertPost, serviceGetAllPosts };
+const serviceGetPostById = async (id) => {
+  const data = await BlogPost.findOne({
+    where: { id },
+    include: [
+    { model: User, as: 'user', attributes: { exclude: 'password' } },
+    { model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+  return data;
+};
+
+module.exports = {
+  serviceInsertPost,
+  serviceGetAllPosts,
+  serverGetAllCategories,
+  serviceGetPostById };
