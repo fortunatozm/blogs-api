@@ -46,9 +46,26 @@ const serviceDelePostById = async (idd, tokenId) => {
   } return 404;
 };
 
+const serviceUpdatePostById = async (id, datas, userId) => {
+  const ids = await BlogPost.findOne({ where: { userId } });
+  if (ids !== null) {   
+    await BlogPost.update({ 
+      title: datas.title, content: datas.content, updated: new Date() }, { where: { id } });
+
+    const dados = await BlogPost.findOne({
+      where: { id },
+      include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } }],
+    });
+    return dados;
+  } return 401;
+};
+
 module.exports = {
   serviceInsertPost,
   serviceGetAllPosts,
   serverGetAllCategories,
   serviceGetPostById,
-  serviceDelePostById };
+  serviceDelePostById,
+  serviceUpdatePostById };

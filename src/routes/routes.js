@@ -15,7 +15,10 @@ const {
   controllerInsertPost,
   controllerGetAllPosts,
   controllerGetPostById,
-  controllerDelePostById } = require('../controllers/controlPosts');
+  controllerDelePostById,
+  // controllerSearchPost,
+  controllerUpdatePostById,
+} = require('../controllers/controlPosts');
 
 const { middwareValidToken } = require('../middwares/token');
 
@@ -30,8 +33,10 @@ myRouter.get('/user/:id', middwareValidToken, controllerGetUserById);
 myRouter.get('/categories', middwareValidToken, controllerGetCategories);
 myRouter.get('/post', middwareValidToken, controllerGetAllPosts);
 myRouter.get('/post/:id', middwareValidToken, controllerGetPostById);
+// myRouter.get('/post/search', middwareValidToken, controllerSearchPost);
 myRouter.delete('/user/:me', middwareValidToken, controllerDeleUserById);
 myRouter.delete('/post/:id', middwareValidToken, controllerDelePostById);
+myRouter.put('/post/:id', middwareValidToken, controllerUpdatePostById);
 
 module.exports = {
   myRouter,

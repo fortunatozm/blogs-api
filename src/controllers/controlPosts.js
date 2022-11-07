@@ -4,6 +4,7 @@ const {
   serverGetAllCategories,
   serviceGetPostById,
   serviceDelePostById,
+  serviceUpdatePostById,
 } = require('../services/servicePosts');
 const { validToken } = require('../functions');
 
@@ -63,8 +64,31 @@ const controllerDelePostById = async (req, res) => {
   return res.status(204).json(data);
 };
 
+const controllerUpdatePostById = async (req, res) => {
+  const { id } = req.params;
+  const { authorization } = req.headers;
+  const { id: userId } = validToken(authorization);
+  const datas = req.body;
+  if (datas.content && datas.title) {
+    const data = await serviceUpdatePostById(id, datas, userId);
+    if (data === 401) {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }
+    return res.status(200).json(data);
+  } 
+  return res.status(400).json({ message: 'Some required fields are missing' });
+};
+
+// const controllerSearchPost = async (req, res) => {
+//   const { q } = req.query;
+//   return res.status(200).json(q);
+// };
+
 module.exports = {
   controllerInsertPost,
   controllerGetAllPosts,
   controllerGetPostById,
-  controllerDelePostById };
+  controllerDelePostById,
+  // controllerSearchPost,
+  controllerUpdatePostById,
+};
