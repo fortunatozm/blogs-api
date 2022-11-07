@@ -80,9 +80,15 @@ const serviceGetUserById = async (idIn) => {
   } return 400;
 };
 
+const serviceDeleUserById = async (id) => { 
+  const data = await User.destroy({ where: { id } });
+  return data;
+};
+
 module.exports = {
   serviceLogin,
   serUser,
   serviceGetAllUsers,
   serviceGetUserById,
+  serviceDeleUserById,
 };

@@ -2,7 +2,9 @@ const {
   serviceLogin, 
   serUser, 
   serviceGetAllUsers, 
-  serviceGetUserById } = require('../services/serviceUser');
+  serviceGetUserById,
+  serviceDeleUserById } = require('../services/serviceUser');
+const { validToken } = require('../functions');
 
 const controllerLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -51,9 +53,17 @@ const controllerGetUserById = async (req, res) => {
   return res.status(200).json(data);
 };
 
+const controllerDeleUserById = async (req, res) => {
+  const { authorization } = req.headers;
+  const { id } = validToken(authorization);
+  const data = await serviceDeleUserById(id);
+  return res.status(204).json(data);
+};
+
 module.exports = {
   controllerLogin,
   controllerUser,
   controllerGetUser,
   controllerGetUserById,
+  controllerDeleUserById,
 };
