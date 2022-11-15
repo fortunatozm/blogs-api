@@ -62,10 +62,16 @@ const serviceUpdatePostById = async (id, datas, userId) => {
   } return 401;
 };
 
+const controllerSearchPost = async (query) => {
+  const data = query;
+  return data;
+};
+
 module.exports = {
   serviceInsertPost,
   serviceGetAllPosts,
   serverGetAllCategories,
   serviceGetPostById,
   serviceDelePostById,
-  serviceUpdatePostById };
+  serviceUpdatePostById,
+  controllerSearchPost };

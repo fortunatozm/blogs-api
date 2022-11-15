@@ -79,16 +79,19 @@ const controllerUpdatePostById = async (req, res) => {
   return res.status(400).json({ message: 'Some required fields are missing' });
 };
 
-// const controllerSearchPost = async (req, res) => {
-//   const { q } = req.query;
-//   return res.status(200).json(q);
-// };
+const controllerSearchPost = async (req, res) => {
+  // const { q } = req.query;
+  const query = req.query.q;
+  console.log(query);
+  const data = controllerSearchPost(query);
+  return res.status(200).json(data);
+};
 
 module.exports = {
   controllerInsertPost,
   controllerGetAllPosts,
   controllerGetPostById,
   controllerDelePostById,
-  // controllerSearchPost,
+  controllerSearchPost,
   controllerUpdatePostById,
 };

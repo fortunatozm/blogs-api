@@ -16,7 +16,7 @@ const {
   controllerGetAllPosts,
   controllerGetPostById,
   controllerDelePostById,
-  // controllerSearchPost,
+  controllerSearchPost,
   controllerUpdatePostById,
 } = require('../controllers/controlPosts');
 
@@ -32,8 +32,8 @@ myRouter.get('/user', middwareValidToken, controllerGetUser);
 myRouter.get('/user/:id', middwareValidToken, controllerGetUserById);
 myRouter.get('/categories', middwareValidToken, controllerGetCategories);
 myRouter.get('/post', middwareValidToken, controllerGetAllPosts);
+myRouter.get('/post/search', middwareValidToken, controllerSearchPost);
 myRouter.get('/post/:id', middwareValidToken, controllerGetPostById);
-// myRouter.get('/post/search', middwareValidToken, controllerSearchPost);
 myRouter.delete('/user/:me', middwareValidToken, controllerDeleUserById);
 myRouter.delete('/post/:id', middwareValidToken, controllerDelePostById);
 myRouter.put('/post/:id', middwareValidToken, controllerUpdatePostById);
